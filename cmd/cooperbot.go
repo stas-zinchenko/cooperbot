@@ -40,17 +40,43 @@ to quickly create a Cobra application.`,
 			log.Fatalf("Please check TELE_TOKEN env variable. %s", err)
 			return
 		}
-		cooperbot.Handle(telebot.OnText, func(m telebot.Context) error {
-			log.Print(m.Message().Payload, m.Text())
-			payload := m.Message().Payload
 
-			switch payload {
-			case "hello":
-				err = m.Send(fmt.Sprintf("Hello. I'm Cooperbot %s!", appVersion))
+		//cooperbot.Handle(telebot.OnText, func(m telebot.Context) error {
+		//	log.Print(m.Message().Payload, m.Text())
+		//	payload := m.Message().Payload
 
-			}
-			return err
+		//	switch payload {
+		//	case "hello":
+		//		err = m.Send(fmt.Sprintf("Hello. I'm Cooperbot %s!", appVersion))
+		//	}
+
+		//	return err
+		//})
+
+		cooperbot.Handle("/start", func(m telebot.Context) error {
+			return m.Reply(fmt.Sprintf("Hello. I'm Cooperbot %s!", appVersion))
+
 		})
+
+		cooperbot.Handle("/about", func(m telebot.Context) error {
+			return m.Reply("My purpose is to tell everything about our Galaxy.")
+
+		})
+		cooperbot.Handle("/galaxy", func(m telebot.Context) error {
+			return m.Reply("https://en.wikipedia.org/wiki/Milky_Way")
+
+		})
+
+		cooperbot.Handle("/sun_system", func(m telebot.Context) error {
+			return m.Reply("https://en.wikipedia.org/wiki/Solar_System")
+
+		})
+
+		cooperbot.Handle("/planets", func(m telebot.Context) error {
+			return m.Reply("https://www.youtube.com/watch?v=libKVRa01L8")
+
+		})
+
 		cooperbot.Start()
 	},
 }
@@ -62,7 +88,7 @@ func init() {
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// cooperbotCmd.PersistentFlags().String("foo", "", "A help for foo")
+	//cooperbotCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
