@@ -10,7 +10,7 @@ format:
 get:
 	go get
 
-b_linux: format get
+build: format get
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o cooperbot -ldflags "-X="github.com/redman-dev29/cooperbot/cmd.appVersion=${VERSION}
 
 image:
