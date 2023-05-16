@@ -1,40 +1,41 @@
 .DEFAULT_GOAL := help
 SHELL := /bin/bash
 
-PROJECT_NAME := cooperbot
-VERSION := $(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-REGISTRY := ghcr.io/redman-dev29
-
-IMAGE_TAG := $(REGISTRY)/$(PROJECT_NAME):$(VERSION)
+APP := cooperbot
+VERSION := $(shell git describe --tags --abbrev=0)
+REGISTRY := gcr.io
+TARGETOS := linux #linux darwin windows
+TARGETARCH := amd64
+CGO_ENABLED = 0
 
 .PHONY: help
 help:
 	@echo "Please use 'make <target>' where <target> is one of"
 	@echo "  linux            to build the Linux binary"
-	@echo "  arm              to build the ARM binary"
-	@echo "  mac              to build the macOS binary"
+	@echo "  macOS            to build the macOS binary"
 	@echo "  windows          to build the Windows binary"
-	@echo "  build            to build Docker image"
+	@echo "  image            to build Docker image"
+	@echo "  push             to push Docker image to repository"
 	@echo "  clean            to remove the Docker image"
 
 linux:
-	GOOS=linux GOARCH=amd64 go build -o $(PROJECT_NAME)-linux-amd64
+	${MAKE} build TARGETOS=linux TARGETARCH=${TARGETARCH}
 
-arm:
-	GOOS=linux GOARCH=arm GOARM=7 go build -o $(PROJECT_NAME)-linux-arm
-
-mac:
-	GOOS=darwin GOARCH=amd64 go build -o $(PROJECT_NAME)-darwin-amd64
+macOS:
+	${MAKE} build TARGETOS=darwin TARGETARCH=${TARGETARCH}
 
 windows:
-	GOOS=windows GOARCH=amd64 go build -o $(PROJECT_NAME)-windows-amd64.exe
+	${MAKE} build TARGETOS=windows TARGETARCH=${TARGETARCH} CGO_ENABLED=1
 
-build: 
-	docker build -t $(IMAGE_TAG) .
+build:
+	CGO_ENABLED=${CGO_ENABLED} GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o cooperbot -ldflags "-X="github.com/redman-dev29/cooperbot/cmd.appVersion=${VERSION}
+
+image:
+	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH} --build-arg CGO_ENABLED=${CGO_ENABLED} --build-arg TARGETARCH=${TARGETARCH} --build-arg TARGETOS=${TARGETOS}
 
 push:
-	docker push $(IMAGE_TAG)
+	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
 
 clean:
-	docker rmi $(IMAGE_TAG)
-	rm -f $(PROJECT_NAME)-linux-amd64 $(PROJECT_NAME)-linux-arm $(PROJECT_NAME)-darwin-amd64 $(PROJECT_NAME)-windows-amd64.exe
+	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	@echo=off rm -f $(APP)

@@ -9,3 +9,4 @@ The bot has several commands:
 /galaxy - Show information about our galaxy.
 /sun_system - All about our solar system.
 /planets - What number of planets we have?
+
