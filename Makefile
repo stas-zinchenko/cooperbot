@@ -14,6 +14,7 @@ help:
 	@echo "  arm              to build the ARM binary"
 	@echo "  mac              to build the macOS binary"
 	@echo "  windows          to build the Windows binary"
+	@echo "  build            to build Docker image"
 	@echo "  clean            to remove the Docker image"
 
 linux:
