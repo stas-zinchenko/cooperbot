@@ -5,6 +5,7 @@ replicaCount: 1
 image:
   repository: staszinch
   tag: "v1.0.4-amd64"
+  arch: amd64
 secret:
   name: "cooperbot"
   env: "TELE_TOKEN"
