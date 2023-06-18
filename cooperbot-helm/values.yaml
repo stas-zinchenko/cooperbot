@@ -1,0 +1,10 @@
+# Default values for cooperbot.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+image:
+  repository: staszinch
+  tag: "v1.0.5-amd64"
+  arch: amd64
+securityContext:
+  privileged: true
