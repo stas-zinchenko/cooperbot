@@ -3,7 +3,7 @@ SHELL := /bin/bash
 
 APP := cooperbot
 VERSION := $(shell git describe --tags --abbrev=0)
-REGISTRY := docker.io/staszinch
+REGISTRY := ghcr.io/stas-zinchenko
 TARGETOS := linux #linux darwin windows
 TARGETARCH := amd64
 CGO_ENABLED = 0
