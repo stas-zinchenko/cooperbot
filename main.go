@@ -1,6 +1,6 @@
 package main
 
-import "github.com/redman-dev29/cooperbot/cmd"
+import "github.com/stas-zinchenko/cooperbot/cmd"
 
 func main() {
 	cmd.Execute()

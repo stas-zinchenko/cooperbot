@@ -1,4 +1,4 @@
-module github.com/redman-dev29/cooperbot
+module github.com/stas-zinchenko/cooperbot
 
 go 1.20
 
