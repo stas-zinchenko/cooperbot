@@ -46,13 +46,18 @@ jobs:
       - name: Helm Package
         run: helm package cooperbot-helm
 
-#      - name: Make releases
-#        with:
-#          username: ${{ secrets.GHCR_USERNAME }}
-#          password: ${{ secrets.GHCR_TOKEN }}
-#        run:
-#          gh release create
-#          gh release upload v1.0.5 cooperbot-1.0.5.tgz
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - Initial release
+          draft: false
+          prerelease: false
 
       - name: Deployment
         run: 
