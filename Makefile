@@ -3,8 +3,8 @@ SHELL := /bin/bash
 
 APP := cooperbot
 VERSION := $(shell git describe --tags --abbrev=0)
-REGISTRY := ghcr.io/stas-zinchenko
-TARGETOS := linux #linux darwin windows
+REGISTRY := staszinch
+TARGETOS := linux
 TARGETARCH := amd64
 CGO_ENABLED = 0
 
@@ -34,11 +34,11 @@ build:
 	CGO_ENABLED=${CGO_ENABLED} GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o cooperbot -ldflags "-X="github.com/stas-zinchenko/cooperbot/cmd.appVersion=${VERSION}
 
 image:
-	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH} --build-arg CGO_ENABLED=${CGO_ENABLED} --build-arg TARGETARCH=${TARGETARCH} --build-arg TARGETOS=${TARGETOS}
+	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} --build-arg CGO_ENABLED=${CGO_ENABLED} --build-arg TARGETARCH=${TARGETARCH} --build-arg TARGETOS=${TARGETOS}
 
 push:
-	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 clean:
-	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 	@echo=off rm -f $(APP)

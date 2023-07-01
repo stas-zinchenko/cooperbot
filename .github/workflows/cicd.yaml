@@ -29,15 +29,31 @@ jobs:
       - name: Test
         run: make test
 
-      - name: Clean
-        run: make clean
-#  cd:
-#    name: CD
-#    needs: ci
-#    runs-on: ubuntu-latest
+  cd:
+    name: CD
+    needs: ci
+    runs-on: ubuntu-latest
 
-#    steps:
-#    - uses: actions/checkout@v3
-#      with:
-#        fetch-depth: 0
-#    - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Helm Test
+        run: helm lint cooperbot-helm
+      
+      - name: Helm Package
+        run: helm package cooperbot-helm
+
+      - name: Make releases
+        with:
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }}
+        run:
+          gh release create
+          gh release upload v1.0.5 cooperbot-1.0.5.tgz
+
+      - name: Deployment
+        run: 
+          helm install cooperbot cooperbot-1.0.5.tgz

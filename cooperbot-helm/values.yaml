@@ -4,7 +4,7 @@
 replicaCount: 1
 image:
   repository: staszinch
-  tag: "v1.0.5-amd64"
+  tag: "v1.0.5-linux-amd64"
   arch: amd64
 securityContext:
   privileged: true
