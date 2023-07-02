@@ -51,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
         with:
-          tag_name: 'v1.0.5'
+          tag_name: "v1.0.5"
           release_name: Release 'v1.0.5'
           body: |
             Changes in this Release
