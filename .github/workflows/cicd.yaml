@@ -53,9 +53,6 @@ jobs:
         with:
           tag_name: "v1.0.5"
           release_name: Release 'v1.0.5'
-          resource: "v1.0.5"
-          code: ""
-          field: "v1.0.5"
           body: |
             Changes in this Release
             - Initial release
