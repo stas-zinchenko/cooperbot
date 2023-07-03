@@ -45,3 +45,10 @@ jobs:
       
       - name: Helm Package
         run: helm package cooperbot-helm
+
+      - name: Create a Release
+        uses: elgohr/Github-Release-Action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
+        with:
+          title: Initial build.
