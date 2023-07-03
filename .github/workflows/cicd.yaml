@@ -3,6 +3,17 @@ name: COOPERBOT-CICD
 on: push
 
 jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: 
   ci:
     name: CI
     runs-on: ubuntu-latest
@@ -51,4 +62,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
         with:
-          title: Initial build.
+          title: cooperbot-vX.X.X
+        
+      - name: 
