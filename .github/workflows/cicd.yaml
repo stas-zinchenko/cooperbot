@@ -1,67 +1,71 @@
-name: COOPERBOT-CICD
+# name: COOPERBOT-CICD
 
-on: push
+# on: push
 
-jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
       
-  #    - name: 
-  # ci:
-  #   name: CI
-  #   runs-on: ubuntu-latest
+#       - name: Make binary files
+#         run: 
+#           make linux
+#           make macOS
+#           make windows
+#   # ci:
+#   #   name: CI
+#   #   runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
+#   #   steps:
+#   #     - name: Checkout
+#   #       uses: actions/checkout@v3
+#   #       with:
+#   #         fetch-depth: 0
       
-  #     - name: Docker Hub Login
-  #       uses: docker/login-action@v2
-  #       with:
-  #         registry: ghcr.io
-  #         username: ${{ secrets.GHCR_USERNAME }}
-  #         password: ${{ secrets.GHCR_TOKEN }}
+#   #     - name: Docker Hub Login
+#   #       uses: docker/login-action@v2
+#   #       with:
+#   #         registry: ghcr.io
+#   #         username: ${{ secrets.GHCR_USERNAME }}
+#   #         password: ${{ secrets.GHCR_TOKEN }}
       
-  #     - name: Build&Push
-  #       env:
-  #         APP: "cooperbot"
-  #         REGISTRY: ${{ secrets.GHCR_USERNAME }}
-  #       run: make image push
+#   #     - name: Build&Push
+#   #       env:
+#   #         APP: "cooperbot"
+#   #         REGISTRY: ${{ secrets.GHCR_USERNAME }}
+#   #       run: make image push
       
-  #     - name: Test
-  #       run: make test
+#   #     - name: Test
+#   #       run: make test
 
-  # cd:
-  #   name: CD
-  #   needs: ci
-  #   runs-on: ubuntu-latest
+#   # cd:
+#   #   name: CD
+#   #   needs: ci
+#   #   runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
+#   #   steps:
+#   #     - name: Checkout
+#   #       uses: actions/checkout@v3
+#   #       with:
+#   #         fetch-depth: 0
       
-  #     - name: Helm Test
-  #       run: helm lint cooperbot-helm
+#   #     - name: Helm Test
+#   #       run: helm lint cooperbot-helm
       
-  #     - name: Helm Package
-  #       run: helm package cooperbot-helm
+#   #     - name: Helm Package
+#   #       run: helm package cooperbot-helm
 
-  #     - name: Create a Release
-  #       uses: elgohr/Github-Release-Action@v4
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
-  #       with:
-  #         title: cooperbot-vX.X.X
+#   #     - name: Create a Release
+#   #       uses: elgohr/Github-Release-Action@v4
+#   #       env:
+#   #         GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
+#   #       with:
+#   #         title: cooperbot-vX.X.X
         
-  #     - name: 
+#   #     - name: 

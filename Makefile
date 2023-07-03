@@ -19,13 +19,13 @@ help:
 	@echo "  clean            to remove the Docker image"
 
 linux:
-	${MAKE} build TARGETOS=linux TARGETARCH=${TARGETARCH}
+	GOARCH=amd64 GOOS=linux go build -o cooperbot-linux-amd64 main.go
 
 macOS:
-	${MAKE} build TARGETOS=darwin TARGETARCH=${TARGETARCH}
+	GOARCH=amd64 GOOS=darwin go build -o cooperbot-darwin-amd64 main.go
 
 windows:
-	${MAKE} build TARGETOS=windows TARGETARCH=${TARGETARCH} CGO_ENABLED=1
+	GOARCH=amd64 GOOS=windows go build -o cooperbot-windows-amd64 main.go
 
 test:
 	./cooperbot version
