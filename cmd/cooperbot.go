@@ -11,7 +11,7 @@ import (
 
 var (
 	//TeleToken bot
-	TeleToken = "6247607846:AAGF5NIxZdv7jDMRR4eDh0CWtmvP9N5IJD4"
+	TeleToken = "TELE_TOKEN"
 )
 
 // cooperbotCmd represents the cooperbot command
